@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "312841144751",
+    "project_id": "buycustompc",
+    "storage_bucket": "buycustompc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312841144751:android:0dc0f07cfd3f4b968c875a",
+        "android_client_info": {
+          "package_name": "com.ibhadresh.buycustompc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312841144751-ttkgesu9e34vm0c0g9idv4lol9f39uva.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtAtRM60A0_WSocUUdmWtGyb9sta0MbNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312841144751-ttkgesu9e34vm0c0g9idv4lol9f39uva.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
