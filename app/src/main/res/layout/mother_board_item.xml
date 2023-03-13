@@ -74,6 +74,32 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Socket Type"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    />
+
+            </LinearLayout>
+
+
 
 
         </LinearLayout>
