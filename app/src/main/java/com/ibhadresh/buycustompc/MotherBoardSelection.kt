@@ -2,9 +2,11 @@ package com.ibhadresh.buycustompc
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
+import kotlin.math.log
 
 class MotherBoardSelection : AppCompatActivity() {
     private lateinit var dbref : DatabaseReference
@@ -23,14 +25,15 @@ class MotherBoardSelection : AppCompatActivity() {
     }
 
     private fun getMotherBoardData() {
-        dbref = FirebaseDatabase.getInstance().getReference("MotherBoards")
-
-        dbref.addValueEventListener(object : ValueEventListener {
+        val Query = FirebaseDatabase.getInstance().getReference("MotherBoards")
+//        val Query = FirebaseDatabase.getInstance().getReference("MotherBoards").orderByChild("socketType").equalTo("LGA 1700")
+        Query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     for(userSnapShot in snapshot.children){
                         val motherBoard = userSnapShot.getValue(MotherBoard::class.java)
                         motherBoardArrayList.add(motherBoard!!)
+                        Log.d("Hello","hello")
                     }
                     motherBoardRecyclerView.adapter = MotherBoardAdapter(motherBoardArrayList)
                 }
