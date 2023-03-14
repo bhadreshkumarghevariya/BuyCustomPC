@@ -37,6 +37,9 @@ class MotherBoardSelection : AppCompatActivity() {
             }
             motherBoardRecyclerView.adapter = MotherBoardAdapter(motherBoardArrayList)
         }
+            .addOnFailureListener { exception ->
+                Log.w("TAG", "Error getting documents: ", exception)
+            }
 //        val Query = FirebaseDatabase.getInstance().getReference("MotherBoards")
 ////        val Query = FirebaseDatabase.getInstance().getReference("MotherBoards").orderByChild("socketType").equalTo("LGA 1700")
 //        Query.addValueEventListener(object : ValueEventListener {
