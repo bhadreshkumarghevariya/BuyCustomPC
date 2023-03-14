@@ -28,8 +28,8 @@ class MotherBoardAdapter(private val motherBoardList : ArrayList<MotherBoard>):R
     }
 
     class MotherBoardViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        val productName : TextView = itemView.findViewById(R.id.tvProductName)
+        val productName : TextView = itemView.findViewById(R.id.tvMotherBoardProductName)
         val socketType : TextView = itemView.findViewById(R.id.tvSocketType)
-        val description : TextView =itemView.findViewById(R.id.tvDescription)
+        val description : TextView =itemView.findViewById(R.id.tvMotherBoardDescription)
     }
 }
