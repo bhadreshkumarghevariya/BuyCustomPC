@@ -48,6 +48,7 @@ class MotherBoardSelection : AppCompatActivity(),MotherBoardAdapter.OnItemClickL
                     val intent = Intent(this,CPUSelection::class.java)
                     intent.putExtra("docRef", documentReference.id)
                     intent.putExtra("socketType",motherBoardArrayList[position].socketType)
+                    intent.putExtra("ramType",motherBoardArrayList[position].ramType)
                     startActivity(intent)
                     Log.d("TAG", "DocumentSnapshot written with ID: ${documentReference.id}")
                 }
