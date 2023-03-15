@@ -35,9 +35,28 @@ class MotherBoardSelection : AppCompatActivity(),MotherBoardAdapter.OnItemClickL
 //        Log.d("TAGG",clickedItem.toString())
 
 
+        val data = hashMapOf(
+                "userId" to "user1",
+                "motherBoardName" to motherBoardArrayList[position].productName,
+                "cpuSocketType" to motherBoardArrayList[position].socketType
+            )
 
-        val intent = Intent(this,CPUSelection::class.java)
-        startActivity(intent)
+            val db = Firebase.firestore
+            db.collection("currentBuildsWithUserId")
+                .add(data)
+                .addOnSuccessListener { documentReference ->
+                    val intent = Intent(this,CPUSelection::class.java)
+                    intent.putExtra("docRef", documentReference.id)
+                    intent.putExtra("socketType",motherBoardArrayList[position].socketType)
+                    startActivity(intent)
+                    Log.d("TAG", "DocumentSnapshot written with ID: ${documentReference.id}")
+                }
+
+                .addOnFailureListener { e ->
+                    Log.w("TAG", "Error adding document", e)
+                }
+
+
     }
 
     private fun getMotherBoardData() {

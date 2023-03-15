@@ -12,6 +12,9 @@
         android:theme="@style/Theme.BuyCustomPC"
         tools:targetApi="31">
         <activity
+            android:name=".RAMSelection"
+            android:exported="false" />
+        <activity
             android:name=".CPUSelection"
             android:exported="false" />
         <activity
