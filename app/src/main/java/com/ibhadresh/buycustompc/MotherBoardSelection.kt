@@ -1,8 +1,10 @@
 package com.ibhadresh.buycustompc
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
@@ -11,7 +13,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlin.math.log
 
-class MotherBoardSelection : AppCompatActivity() {
+class MotherBoardSelection : AppCompatActivity(),MotherBoardAdapter.OnItemClickListner {
     private lateinit var dbref : DatabaseReference
     private lateinit var motherBoardRecyclerView: RecyclerView
     private lateinit var motherBoardArrayList: ArrayList<MotherBoard>
@@ -27,6 +29,17 @@ class MotherBoardSelection : AppCompatActivity() {
         getMotherBoardData()
     }
 
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this, position.toString(), Toast.LENGTH_SHORT).show()
+        val clickedItem:MotherBoard = motherBoardArrayList[position]
+//        Log.d("TAGG",clickedItem.toString())
+
+
+
+        val intent = Intent(this,CPUSelection::class.java)
+        startActivity(intent)
+    }
+
     private fun getMotherBoardData() {
         val db = Firebase.firestore
         db.collection("motherboards").get().addOnSuccessListener {
@@ -35,31 +48,12 @@ class MotherBoardSelection : AppCompatActivity() {
                 motherBoardArrayList.add(document.toObject<MotherBoard>())
 //            Log.d("MBLIST",motherBoardArrayList.toString())
             }
-            motherBoardRecyclerView.adapter = MotherBoardAdapter(motherBoardArrayList)
+            motherBoardRecyclerView.adapter = MotherBoardAdapter(motherBoardArrayList,this)
+
         }
             .addOnFailureListener { exception ->
                 Log.w("TAG", "Error getting documents: ", exception)
             }
-//        val Query = FirebaseDatabase.getInstance().getReference("MotherBoards")
-////        val Query = FirebaseDatabase.getInstance().getReference("MotherBoards").orderByChild("socketType").equalTo("LGA 1700")
-//        Query.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                if(snapshot.exists()){
-//                    for(userSnapShot in snapshot.children){
-//                        val motherBoard = userSnapShot.getValue(MotherBoard::class.java)
-//                        motherBoardArrayList.add(motherBoard!!)
-////                        Log.d("Hello","hello")
-//                        Log.d("MBLIST2",motherBoardArrayList.toString())
-//                    }
-//                    motherBoardRecyclerView.adapter = MotherBoardAdapter(motherBoardArrayList)
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        }
-//        )
+
     }
 }
