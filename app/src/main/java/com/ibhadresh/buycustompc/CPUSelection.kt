@@ -14,6 +14,7 @@ import com.google.firebase.ktx.Firebase
 class CPUSelection : AppCompatActivity(),CPUAdapter.OnItemClickListner {
     lateinit var docName:String
     lateinit var ramType:String
+    lateinit var motherBoardName:String
     private lateinit var processorRecyclerView: RecyclerView
     private lateinit var processorArrayList: ArrayList<CPU>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,8 @@ class CPUSelection : AppCompatActivity(),CPUAdapter.OnItemClickListner {
         processorRecyclerView.setHasFixedSize(true)
 
         processorArrayList = arrayListOf<CPU>()
+
+        motherBoardName = intent.getStringExtra("motherboardName").toString()
 
 
         docName = intent.getStringExtra("docRef").toString()
@@ -63,6 +66,8 @@ class CPUSelection : AppCompatActivity(),CPUAdapter.OnItemClickListner {
                 val intent = Intent(this,RAMSelection::class.java)
                 intent.putExtra("docRef", docName)
                 intent.putExtra("ramType",ramType)
+                intent.putExtra("motherboardName",motherBoardName)
+                intent.putExtra("processorName",processorArrayList[position].processorName)
                 startActivity(intent)
                 Log.d("TAG", "DocumentSnapshot written with ID: ${docName}")
             }

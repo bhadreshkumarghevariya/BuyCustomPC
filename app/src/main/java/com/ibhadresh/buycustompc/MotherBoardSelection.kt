@@ -49,6 +49,7 @@ class MotherBoardSelection : AppCompatActivity(),MotherBoardAdapter.OnItemClickL
                     intent.putExtra("docRef", documentReference.id)
                     intent.putExtra("socketType",motherBoardArrayList[position].socketType)
                     intent.putExtra("ramType",motherBoardArrayList[position].ramType)
+                    intent.putExtra("motherboardName",motherBoardArrayList[position].productName)
                     startActivity(intent)
                     Log.d("TAG", "DocumentSnapshot written with ID: ${documentReference.id}")
                 }
