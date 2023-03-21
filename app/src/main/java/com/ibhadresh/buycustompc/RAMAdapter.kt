@@ -1,12 +1,16 @@
 package com.ibhadresh.buycustompc
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class RAMAdapter(
+    private val context: Context,
     private val ramList: ArrayList<RAM>,
     private val listener : OnItemClickListner
     ):
@@ -27,6 +31,12 @@ class RAMAdapter(
         holder.ramName.text = currentRAM.ramName
         holder.ramSpeed.text = currentRAM.ramSpeed
         holder.ramType.text = currentRAM.ramType
+        holder.price.text = currentRAM.price.toString()
+
+        Glide.with(context)
+            .load(currentRAM.imgURI)
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(holder.imgURI)
     }
 
     inner class RAMViewHolder(itemView: View):RecyclerView.ViewHolder(itemView),
@@ -34,6 +44,8 @@ class RAMAdapter(
         val ramName:TextView = itemView.findViewById(R.id.tvRamProductName)
         val ramType:TextView = itemView.findViewById(R.id.tvRamType)
         val ramSpeed:TextView = itemView.findViewById(R.id.tvRamSpeed)
+        val imgURI:ImageView = itemView.findViewById(R.id.ramImageView)
+        val price : TextView = itemView.findViewById(R.id.tvRamPrice)
 
         init {
             itemView.setOnClickListener(this)

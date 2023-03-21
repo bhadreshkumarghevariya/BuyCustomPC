@@ -1,13 +1,17 @@
 package com.ibhadresh.buycustompc
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import org.w3c.dom.Text
 
 class CPUAdapter (
+    private val context: Context,
     private val processorList : ArrayList<CPU>,
     private val listener :OnItemClickListner
     ):
@@ -28,6 +32,13 @@ class CPUAdapter (
         holder.processorName.text = currentProcessor.processorName
         holder.socketType.text = currentProcessor.socketType
         holder.description.text = currentProcessor.description
+        holder.cpuPrice.text = currentProcessor.cpuPrice.toString()
+
+
+        Glide.with(context)
+            .load(currentProcessor.imgURI)
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(holder.imgURI)
     }
 
     inner class CPUViewHolder(itemView: View):RecyclerView.ViewHolder(itemView),
@@ -35,6 +46,8 @@ class CPUAdapter (
         val processorName:TextView = itemView.findViewById(R.id.tvCPUProductName)
         val socketType:TextView = itemView.findViewById(R.id.tvCPUSocketType)
         val description:TextView = itemView.findViewById(R.id.tvCPUDescription)
+        val imgURI : ImageView = itemView.findViewById(R.id.cpuImageView)
+        val cpuPrice : TextView = itemView.findViewById(R.id.tvCPUPrice)
 
         init {
             itemView.setOnClickListener(this)

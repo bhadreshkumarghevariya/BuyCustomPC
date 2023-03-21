@@ -21,6 +21,8 @@ class MotherBoardSelection : AppCompatActivity(),MotherBoardAdapter.OnItemClickL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mother_board_selection)
 
+        title = "Mother Board"
+
         motherBoardRecyclerView = findViewById(R.id.motherBoardRecyclerView)
         motherBoardRecyclerView.layoutManager = LinearLayoutManager(this)
         motherBoardRecyclerView.setHasFixedSize(true)
@@ -34,7 +36,6 @@ class MotherBoardSelection : AppCompatActivity(),MotherBoardAdapter.OnItemClickL
         val clickedItem:MotherBoard = motherBoardArrayList[position]
 //        Log.d("TAGG",clickedItem.toString())
 
-
         val data = hashMapOf(
                 "userId" to "user1",
                 "motherBoardName" to motherBoardArrayList[position].productName,
@@ -45,11 +46,15 @@ class MotherBoardSelection : AppCompatActivity(),MotherBoardAdapter.OnItemClickL
             db.collection("currentBuildsWithUserId")
                 .add(data)
                 .addOnSuccessListener { documentReference ->
-                    val intent = Intent(this,CPUSelection::class.java)
+                    val intent = Intent(this,MotherBoardDetails::class.java)
                     intent.putExtra("docRef", documentReference.id)
                     intent.putExtra("socketType",motherBoardArrayList[position].socketType)
                     intent.putExtra("ramType",motherBoardArrayList[position].ramType)
                     intent.putExtra("motherboardName",motherBoardArrayList[position].productName)
+                    intent.putExtra("mbPrice",motherBoardArrayList[position].price)
+                    intent.putExtra("imgURI",motherBoardArrayList[position].imgURI)
+                    intent.putExtra("description",motherBoardArrayList[position].description)
+                    Log.d("M",motherBoardArrayList[position].toString())
                     startActivity(intent)
                     Log.d("TAG", "DocumentSnapshot written with ID: ${documentReference.id}")
                 }
@@ -69,7 +74,7 @@ class MotherBoardSelection : AppCompatActivity(),MotherBoardAdapter.OnItemClickL
                 motherBoardArrayList.add(document.toObject<MotherBoard>())
 //            Log.d("MBLIST",motherBoardArrayList.toString())
             }
-            motherBoardRecyclerView.adapter = MotherBoardAdapter(motherBoardArrayList,this)
+            motherBoardRecyclerView.adapter = MotherBoardAdapter(this,motherBoardArrayList,this)
 
         }
             .addOnFailureListener { exception ->

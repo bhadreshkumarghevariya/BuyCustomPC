@@ -17,11 +17,15 @@ class RAMSelection : AppCompatActivity(), RAMAdapter.OnItemClickListner {
     lateinit var ramType:String
     lateinit var motherboardName:String
     lateinit var processorName:String
+    var mbPrice : Double = 0.0
+    var cpuPrice : Double = 0.0
     private lateinit var ramRecyclerView: RecyclerView
     private lateinit var ramList:ArrayList<RAM>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ramselection)
+
+        title = "Ram"
 
         ramRecyclerView = findViewById(R.id.ramRecyclerView)
         ramRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -29,6 +33,10 @@ class RAMSelection : AppCompatActivity(), RAMAdapter.OnItemClickListner {
 
         motherboardName = intent.getStringExtra("motherboardName").toString()
         processorName = intent.getStringExtra("processorName").toString()
+
+        mbPrice = intent.getDoubleExtra("mbPrice",0.0)
+        cpuPrice = intent.getDoubleExtra("cpuPrice",0.0)
+
 
         ramList = arrayListOf<RAM>()
 
@@ -45,7 +53,7 @@ class RAMSelection : AppCompatActivity(), RAMAdapter.OnItemClickListner {
                 for (document in documents){
                     ramList.add(document.toObject<RAM>())
                 }
-                ramRecyclerView.adapter = RAMAdapter(ramList,this)
+                ramRecyclerView.adapter = RAMAdapter(this,ramList,this)
             }
             .addOnFailureListener { exception ->
                 Log.w("TAG", "Error getting documents: ", exception)
@@ -70,6 +78,9 @@ class RAMSelection : AppCompatActivity(), RAMAdapter.OnItemClickListner {
                 intent.putExtra("motherboardName",motherboardName)
                 intent.putExtra("processorName",processorName)
                 intent.putExtra("ramName",ramList[position].ramName)
+                intent.putExtra("cpuPrice",cpuPrice)
+                intent.putExtra("mbPrice",mbPrice)
+                intent.putExtra("ramPrice",ramList[position].price)
                 startActivity(intent)
                 Log.d("TAG", "DocumentSnapshot written with ID: ${docName}")
             }

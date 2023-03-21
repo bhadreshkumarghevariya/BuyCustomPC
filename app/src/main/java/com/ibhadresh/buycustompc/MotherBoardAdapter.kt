@@ -1,21 +1,32 @@
 package com.ibhadresh.buycustompc
 
 import android.app.Activity
+import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class MotherBoardAdapter(
+    private val context: Context,
     private val motherBoardList : ArrayList<MotherBoard>,
     private val listener : OnItemClickListner
     ):RecyclerView.Adapter<MotherBoardAdapter.MotherBoardViewHolder>() {
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MotherBoardViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.mother_board_item,parent,false)
@@ -32,28 +43,12 @@ class MotherBoardAdapter(
         holder.productName.text = currentMotherBoard.productName
         holder.socketType.text = currentMotherBoard.socketType
         holder.description.text = currentMotherBoard.description
+        holder.price.text = currentMotherBoard.price.toString()
 
-//        holder.itemView.setOnClickListener{
-//            Log.d("ON CLICK",currentMotherBoard.socketType.toString())
-//            val data = hashMapOf(
-//                "userId" to "user1",
-//                "motherBoardName" to currentMotherBoard.productName,
-//                "cpuSocketType" to currentMotherBoard.socketType
-//            )
-//
-//            val db = Firebase.firestore
-//            db.collection("currentBuildsWithUserId")
-//                .add(data)
-//                .addOnSuccessListener { documentReference ->
-//                    Log.d("TAG", "DocumentSnapshot written with ID: ${documentReference.id}")
-//                }
-//
-//                .addOnFailureListener { e ->
-//                    Log.w("TAG", "Error adding document", e)
-//                }
-//
-//        }
-
+        Glide.with(context)
+            .load(currentMotherBoard.imgURI)
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(holder.imgURI)
     }
 
     inner class MotherBoardViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView),
@@ -61,6 +56,8 @@ class MotherBoardAdapter(
         val productName : TextView = itemView.findViewById(R.id.tvMotherBoardProductName)
         val socketType : TextView = itemView.findViewById(R.id.tvSocketType)
         val description : TextView =itemView.findViewById(R.id.tvMotherBoardDescription)
+        var imgURI : ImageView = itemView.findViewById(R.id.mbImageView)
+        var price : TextView = itemView.findViewById(R.id.tvMBPrice)
 
         init {
             itemView.setOnClickListener(this)

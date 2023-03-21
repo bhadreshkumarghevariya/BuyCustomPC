@@ -13,12 +13,15 @@
         android:layout_height="wrap_content"
         tools:srcCompat="@tools:sample/avatars"
         android:src="@mipmap/ic_launcher"
-        android:layout_margin="8dp"/>
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="45dp"
+        android:paddingVertical="20dp"/>
     <Button
         android:id="@+id/btnBuildYourOwn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:text="Build Your Own PC"
+        android:textStyle="bold"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"/>
+        android:layout_marginVertical="16dp"/>
 </LinearLayout>

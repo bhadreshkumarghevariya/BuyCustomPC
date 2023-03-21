@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/checkout_total_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Total amount: $xxx"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/checkout_name"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_below="@+id/checkout_total_amount"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="0dp"
+        android:hint="Name"
+        android:inputType="text"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/checkout_email"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_below="@+id/checkout_name"
+        android:layout_marginTop="10dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/checkout_address"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:layout_below="@+id/checkout_email"
+        android:layout_marginTop="10dp"
+        android:hint="Address"
+        android:inputType="textPostalAddress"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/checkout_zipcode"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_below="@+id/checkout_address"
+        android:layout_marginTop="13dp"
+        android:hint="zipcode"
+        android:inputType="number"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/checkout_card_number2"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:layout_below="@+id/checkout_zipcode"
+        android:layout_marginTop="10dp"
+        android:hint="Mobile Number"
+        android:inputType="number"
+        android:padding="10dp"
+        />
+
+    <Button
+        android:id="@+id/checkout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="161dp"
+        android:layout_marginBottom="30dp"
+        android:text="Pay" />
+
+
+
+</RelativeLayout>

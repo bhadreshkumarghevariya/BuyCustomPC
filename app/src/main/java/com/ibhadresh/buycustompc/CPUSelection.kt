@@ -15,11 +15,14 @@ class CPUSelection : AppCompatActivity(),CPUAdapter.OnItemClickListner {
     lateinit var docName:String
     lateinit var ramType:String
     lateinit var motherBoardName:String
+    var mbPrice : Double = 0.0
     private lateinit var processorRecyclerView: RecyclerView
     private lateinit var processorArrayList: ArrayList<CPU>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cpuselection)
+
+        title = "Processor"
 
         processorRecyclerView = findViewById(R.id.processorRecyclerView)
         processorRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -28,6 +31,10 @@ class CPUSelection : AppCompatActivity(),CPUAdapter.OnItemClickListner {
         processorArrayList = arrayListOf<CPU>()
 
         motherBoardName = intent.getStringExtra("motherboardName").toString()
+
+        mbPrice = intent.getDoubleExtra("mbPrice",0.0)
+
+        Log.d("totalPrice from cpu",mbPrice.toString())
 
 
         docName = intent.getStringExtra("docRef").toString()
@@ -45,7 +52,7 @@ class CPUSelection : AppCompatActivity(),CPUAdapter.OnItemClickListner {
                 for (document in documents){
                     processorArrayList.add(document.toObject<CPU>())
                 }
-                processorRecyclerView.adapter = CPUAdapter(processorArrayList,this)
+                processorRecyclerView.adapter = CPUAdapter(this,processorArrayList,this)
             }
             .addOnFailureListener { exception ->
                 Log.w("TAG", "Error getting documents: ", exception)
@@ -63,11 +70,20 @@ class CPUSelection : AppCompatActivity(),CPUAdapter.OnItemClickListner {
             .document(docName)
             .set(data, SetOptions.merge())
             .addOnSuccessListener {
-                val intent = Intent(this,RAMSelection::class.java)
+                val intent = Intent(this,CPUDetails::class.java)
                 intent.putExtra("docRef", docName)
                 intent.putExtra("ramType",ramType)
                 intent.putExtra("motherboardName",motherBoardName)
                 intent.putExtra("processorName",processorArrayList[position].processorName)
+                intent.putExtra("cpuPrice",processorArrayList[position].cpuPrice)
+                intent.putExtra("mbPrice",mbPrice)
+
+                intent.putExtra("cpuSocketType",processorArrayList[position].socketType)
+                intent.putExtra("description",processorArrayList[position].description)
+                intent.putExtra("cpuName",processorArrayList[position].processorName)
+                intent.putExtra("imgURI",processorArrayList[position].imgURI)
+
+//                (processorArrayList[position].cpuPrice?.plus(totalPrice) ?: intent.putExtra("totalPrice",totalPrice)) as Double
                 startActivity(intent)
                 Log.d("TAG", "DocumentSnapshot written with ID: ${docName}")
             }
